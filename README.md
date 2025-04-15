@@ -43,33 +43,20 @@ Die Quoties-App ist eine Webanwendung, die es Benutzern ermöglicht, zufällige 
    ```bash
    npm run dev
    ```
-   
-4. **Abhängigkeiten SpringBoot installieren:**
-
-   ```bash
-   mvn clean install
-   ```
-
-5. **Spring Boot-Server starten:**
-
-   ```bash
-   mvn spring-boot:run
-   ```
 
    Das Frontend wird unter [http://localhost:3000](http://localhost:3000) verfügbar sein.
 
-   Das Backend wird unter [http://localhost:8080](http://localhost:8080) verfügbar sein.
 
 ### Backend (Spring Boot)
 
 1. **Klonen des Repositories:**
 
    ```bash
-   git clone https://github.com/dein-benutzername/quoties-app.git
-   cd quoties-app/backend
+   git clone https://github.com/Oscip/Quoties.git
+   cd Quoties/quoties-be
    ```
 
-2. **Abhängigkeiten installieren (falls nicht automatisch installiert):**
+2. **Abhängigkeiten installieren**
 
    ```bash
    mvn clean install
@@ -135,7 +122,7 @@ Die Applikation wird mit JUnit im Backend getestet und die API-Calls an sich mit
    java -jar target/quoties-app.jar
    ```
 
-3. **Frontend und Backend auf bevorzugten Hosting-Service deployen.**
+3. **Frontend kann dann auf Vercel deployt werden.**
 
 ## Technologien
 
