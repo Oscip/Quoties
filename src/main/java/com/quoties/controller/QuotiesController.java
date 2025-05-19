@@ -31,15 +31,16 @@ public class QuotiesController {
     public String createNewQuote() {
         String word = randomWordClient.fetchRandomWord();
         String definition = randomWordClient.fetchDefinition(word);
+        String fetchedQuote  = randomWordClient.fetchQuote(word);
 
         Quoties quote = new Quoties();
         quote.setWord(word);
         quote.setDefinition(definition);
-        quote.setQuote("Example quote about " + word);
+        quote.setQuote(fetchedQuote);
         quote.setDefinitionTranslated("Beispiel für " + word);
         quotiesRepository.save(quote);
 
-        return word + definition;
+        return word + definition + quote;
     }
 
 }
