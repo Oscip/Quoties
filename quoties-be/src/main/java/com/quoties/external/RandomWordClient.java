@@ -58,4 +58,43 @@ public class RandomWordClient {
             return "Error fetching definition: " + e.getMessage();
         }
     }
+
+    public String fetchQuote(String word) {
+        try {
+            URL url = new URL("https://favqs.com/api/quotes?filter=" + word);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            connection.setRequestProperty("Authorization", "Token token=91244f7cce1fe0ab8ea0176803185d0a");
+
+            if (connection.getResponseCode() != 200) {
+                return "No quote available (HTTP " + connection.getResponseCode() + ")";
+            }
+
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream())
+            );
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response.toString());
+
+            if (root.has("quotes") && root.get("quotes").size() > 0) {
+                JsonNode firstQuote = root.get("quotes").get(0);
+                String quoteText = firstQuote.path("body").asText();
+                String author = firstQuote.path("author").asText();
+                return "\"" + quoteText + "\" — " + author;
+            }
+            return "No quotes found containing: " + word;
+
+        } catch (Exception e) {
+            return "Error fetching quote: " + e.getMessage();
+        }
+    }
+
 }
