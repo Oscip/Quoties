@@ -30,18 +30,23 @@ public class QuotiesController {
     @GetMapping("/quotes/new")
     public String createNewQuote() {
         String word = randomWordClient.fetchRandomWord();
+        String wordTranslated = randomWordClient.fetchTranslatedWord(word);
         String definition = randomWordClient.fetchDefinition(word);
-        String fetchedQuote  = randomWordClient.fetchQuote(word);
-        String fetchTranslatedWord = randomWordClient.fetchTranslatedWord(word);
+        String definitionTranslated = randomWordClient.fetchTranslatedDefinition(definition);
+        String quote = randomWordClient.fetchQuote(word);
+        String quoteTranslated = randomWordClient.fetchTranslatedQuote(quote);
 
-        Quoties quote = new Quoties();
-        quote.setWord(word);
-        quote.setDefinition(definition);
-        quote.setQuote(fetchedQuote);
-        quote.setDefinitionTranslated(fetchTranslatedWord);
-        quotiesRepository.save(quote);
 
-        return word + definition + quote;
+        Quoties quoties = new Quoties();
+        quoties.setWord(word);
+        quoties.setWordTranslated(wordTranslated);
+        quoties.setDefinition(definition);
+        quoties.setDefinitionTranslated(definitionTranslated);
+        quoties.setQuote(quote);
+        quoties.setQuoteTranslated(quoteTranslated);
+        quotiesRepository.save(quoties);
+
+        return word + definition + quote + wordTranslated + definitionTranslated + quoteTranslated;
     }
 
 }

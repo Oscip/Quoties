@@ -15,16 +15,20 @@ public class Quoties {
     private Long id;
 
     private String quote;
+    private String quoteTranslated;
     private String word;
+    private String wordTranslated;
     private String definition;
     private String definitionTranslated;
 
 
     public Quoties() {}
 
-    public Quoties(String quote, String word, String definition, String definitionTranslated) {
+    public Quoties(String quote, String quoteTranslated, String word, String wordTranslated, String definition, String definitionTranslated) {
         this.quote = quote;
+        this.quoteTranslated = quoteTranslated;
         this.word = word;
+        this.wordTranslated = wordTranslated;
         this.definition = definition;
         this.definitionTranslated = definitionTranslated;
     }
@@ -46,6 +50,10 @@ public class Quoties {
         this.quote = quote;
     }
 
+    public String getQuoteTranslated() { return quoteTranslated; }
+
+    public void setQuoteTranslated(String quoteTranslated) { this.quoteTranslated = quoteTranslated; }
+
     public String getWord() {
         return word;
     }
@@ -53,6 +61,10 @@ public class Quoties {
     public void setWord(String word) {
         this.word = word;
     }
+
+    public String getWordTranslated() { return wordTranslated; }
+
+    public void setWordTranslated(String wordTranslated) { this.wordTranslated = wordTranslated; }
 
     public String getDefinition() {
         return definition;
@@ -66,7 +78,5 @@ public class Quoties {
         return definitionTranslated;
     }
 
-    public void setDefinitionTranslated(String definitionTranslated) {
-        this.definitionTranslated = definitionTranslated;
-    }
+    public void setDefinitionTranslated(String definitionTranslated) { this.definitionTranslated = definitionTranslated;}
 }
