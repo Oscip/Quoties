@@ -141,7 +141,34 @@ public class RandomWordClient {
 
                 JsonNode root = new ObjectMapper().readTree(reader);
 
-                // Extract translation from response
+                if (root.has("responseData")) {
+                    JsonNode responseData = root.path("responseData");
+                    if (responseData.has("translatedText")) {
+                        return responseData.path("translatedText").asText();
+                    }
+                }
+                return "No translation found";
+            }
+        } catch (Exception e) {
+            return "Error fetching translation: " + e.getMessage();
+        }
+    }
+
+    public String fetchTranslatedDefinition(String definition) {
+        try {
+            URL url = new URL("https://api.mymemory.translated.net/get?q=" + URLEncoder.encode(definition, "UTF-8") + "&langpair=en|de");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            if (connection.getResponseCode() != 200) {
+                return "No translation available (HTTP " + connection.getResponseCode() + ")";
+            }
+
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()))) {
+
+                JsonNode root = new ObjectMapper().readTree(reader);
+
                 if (root.has("responseData")) {
                     JsonNode responseData = root.path("responseData");
                     if (responseData.has("translatedText")) {
