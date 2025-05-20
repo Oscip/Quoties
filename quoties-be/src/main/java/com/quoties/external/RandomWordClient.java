@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.net.URLEncoder;
 
 @Service
 public class RandomWordClient {
@@ -94,6 +95,63 @@ public class RandomWordClient {
 
         } catch (Exception e) {
             return "Error fetching quote: " + e.getMessage();
+        }
+    }
+
+    public String fetchTranslatedWord(String word) {
+        try {
+            URL url = new URL("https://api.mymemory.translated.net/get?q=" + URLEncoder.encode(word, "UTF-8") + "&langpair=en|de");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            if (connection.getResponseCode() != 200) {
+                return "No translation available (HTTP " + connection.getResponseCode() + ")";
+            }
+
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()))) {
+
+                JsonNode root = new ObjectMapper().readTree(reader);
+
+                if (root.has("responseData")) {
+                    JsonNode responseData = root.path("responseData");
+                    if (responseData.has("translatedText")) {
+                        return responseData.path("translatedText").asText();
+                    }
+                }
+                return "No translation found";
+            }
+        } catch (Exception e) {
+            return "Error fetching translation: " + e.getMessage();
+        }
+    }
+
+    public String fetchTranslatedQuote(String quote) {
+        try {
+            URL url = new URL("https://api.mymemory.translated.net/get?q=" + URLEncoder.encode(quote, "UTF-8") + "&langpair=en|de");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            if (connection.getResponseCode() != 200) {
+                return "No translation available (HTTP " + connection.getResponseCode() + ")";
+            }
+
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()))) {
+
+                JsonNode root = new ObjectMapper().readTree(reader);
+
+                // Extract translation from response
+                if (root.has("responseData")) {
+                    JsonNode responseData = root.path("responseData");
+                    if (responseData.has("translatedText")) {
+                        return responseData.path("translatedText").asText();
+                    }
+                }
+                return "No translation found";
+            }
+        } catch (Exception e) {
+            return "Error fetching translation: " + e.getMessage();
         }
     }
 

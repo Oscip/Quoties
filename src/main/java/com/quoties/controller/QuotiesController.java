@@ -32,12 +32,13 @@ public class QuotiesController {
         String word = randomWordClient.fetchRandomWord();
         String definition = randomWordClient.fetchDefinition(word);
         String fetchedQuote  = randomWordClient.fetchQuote(word);
+        String fetchTranslatedWord = randomWordClient.fetchTranslatedWord(word);
 
         Quoties quote = new Quoties();
         quote.setWord(word);
         quote.setDefinition(definition);
         quote.setQuote(fetchedQuote);
-        quote.setDefinitionTranslated("Beispiel für " + word);
+        quote.setDefinitionTranslated(fetchTranslatedWord);
         quotiesRepository.save(quote);
 
         return word + definition + quote;
