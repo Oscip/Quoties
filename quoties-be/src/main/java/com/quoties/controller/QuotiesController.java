@@ -61,7 +61,7 @@ public class QuotiesController {
     }
 
 
-    @GetMapping("/quotes/new")
+    @GetMapping("/quotes")
     public String createNewQuote() {
         ObjectMapper objectMapper = new ObjectMapper();
 
