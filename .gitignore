@@ -1,3 +1,78 @@
-### IntelliJ IDEA ###
-.idea
+# Node.js-typische Dateien
+node_modules/
+**/node_modules/
 
+# Logdateien
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Datenbankdateien (SQL-Exports etc.)
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+*.db3
+*.bak
+
+# Betriebssystem-spezifisches
+.DS_Store
+Thumbs.db
+
+# Umgebungsvariablen
+.env
+.env.*
+
+# IDEs & Editoren
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build-Artefakte (z. B. für TypeScript, Java etc.)
+dist/
+build/
+out/
+target/
+**/dist/
+**/build/
+**/out/
+**/target/
+
+# Coverage & Test Output
+coverage/
+**/coverage/
+.nyc_output/
+
+# Sonstige temporäre Dateien
+*.tmp
+*.temp
+*.log.*
+*.orig
+
+# Git-eigene Backup-Dateien
+*.rej
+*.merge
+
+# Optional: Ignoriere alle .zip/.tar/.gz usw.
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+
+# Optional: IntelliJ IDEA generierte Dateien
+*.iml
+.idea/
+
+# Optional: macOS Finder-Dateien
+*.DS_Store
+
+# Optional: Java spezifisch (falls du Spring o. Ä. nutzt)
+*.class
+*.jar
+*.war
+*.ear
+    
+quoties-be/docker-compose.yml

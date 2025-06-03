@@ -6,8 +6,6 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [fetchedData, setFetchedData] = useState(null);
 
-  // Uncomment when Merge Conflicts in "dev branch are resolved
-/*
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -15,7 +13,7 @@ export default function Home() {
       const audio = new Audio('/item_box.mp3');
       audio.play();
 
-      const response = await fetch("http://localhost:8080/wortübersetzt/quote/quotübersetzt/Definition/definitionübersetzt", {
+      const response = await fetch("http://localhost:8080/api/quotes/new", {
       method: "GET",
       });
 
@@ -33,7 +31,6 @@ export default function Home() {
       setLoading(false);
     }
   };
-*/
 
   return (
     <div className="m-10">
@@ -48,7 +45,7 @@ export default function Home() {
           <div>
             <button
               className="w-20 h-20 rounded hover:scale-125 transition-transform p-2"
-              // onClick={fetchData}
+              onClick={fetchData}
             >
               <Image
                 src="/item_box.webp"
@@ -58,7 +55,7 @@ export default function Home() {
                 height={100}
               />
             </button>
-            {loading && <p className="mt-4 text-yellow-500">Lade...</p>}
+            {loading && <p className="mt-4">Lade...</p>}
           </div>
         </div>
         <div></div>

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: QuotiesDB
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user1234
+      MYSQL_ROOT_PASSWORD: root1234
+    volumes:
+      - dbdata:/var/lib/mysql
+    restart: on-failure  # Swarm deploy not used here
+
+  app:
+    image: phpmyadmin/phpmyadmin
+    container_name: PHPMyAdmin
+    depends_on:
+      - db
+    ports:
+      - '80:80'
+    environment:
+      PMA_HOST: db
+    restart: on-failure  # Swarm deploy not used here
+
+volumes:
+  dbdata:
