@@ -19,6 +19,7 @@ public class QuotiesController {
     @Autowired
     private RandomWordClient randomWordClient;
 
+    // Holt sich ein Wort
     @GetMapping("/word/random")
     public String getRandomWord() {
         try {
@@ -34,6 +35,7 @@ public class QuotiesController {
         }
     }
 
+    // Holt sich ein Wort auf die angefragte Menge
     @GetMapping("/words/{number}")
     public String getRandomWords(@PathVariable int number) {
         try {
@@ -59,7 +61,8 @@ public class QuotiesController {
     }
 
 
-    @GetMapping("/quotes/new")
+
+    @GetMapping("/quotes")
     public String createNewQuote() {
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -71,8 +74,20 @@ public class QuotiesController {
             String definitionTranslated = randomWordClient.fetchTranslatedDefinition(definition);
             String quote = randomWordClient.fetchQuote(word);
 
-            // Quote Wert überprüfen
-            if (quote == null || quote.trim().equalsIgnoreCase("No quotes found")) {
+            // Überprüfung der Gültigkeit der Daten
+            boolean isQuoteInvalid = (
+                    quote == null ||
+                            quote.trim().isEmpty() ||
+                            quote.toLowerCase().contains("no quotes found")
+            );
+
+            boolean isDefinitionInvalid = (
+                    definition == null ||
+                            definition.trim().isEmpty() ||
+                            definition.toLowerCase().contains("no definition available")
+            );
+
+            if (isQuoteInvalid || isDefinitionInvalid) {
                 continue;
             }
 
@@ -89,7 +104,7 @@ public class QuotiesController {
                 String jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(root);
                 System.out.println(jsonString);
 
-                // Speichern in der Datenbank
+                // Speichert die Daten in der Datenbank
                 Quoties quoties = new Quoties();
                 quoties.setWord(word);
                 quoties.setWordTranslated(wordTranslated);

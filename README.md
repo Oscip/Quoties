@@ -101,6 +101,14 @@ Das Backend integriert eine öffentliche API, um ein zufälliges Wort zu bekomme
         }
       ]
       ```
+      - Beschreibung: Gibt ein zufälliges Wort zusammen mit seiner Definition zurück.
+      - Antwort:
+        ```json
+        {
+          "word": "inspiration",
+          "definition": "the process of being mentally stimulated to do or feel something, especially to do something creative."
+        }
+        ```
 
 ### Testen
 
