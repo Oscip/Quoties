@@ -1,6 +1,11 @@
 import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Jacques_Francois } from "next/font/google";
 import { useState } from "react";
+
+const jacquesFrancois = Jacques_Francois({
+  subsets: ["latin"],
+  weight: "400", // nur Regular verfügbar
+});
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -34,18 +39,15 @@ export default function Home() {
 
   return (
 <div className="m-10">
-  {/* Erste Zeile */}
   <div className="grid grid-cols-5 gap-4 w-full place-items-center">
-    <div className="col-span-1 text-3xl font-bold">Quoties</div>
+    <div className={`${jacquesFrancois.className} col-span-1 text-5xl`}>Quoties</div>
     
-    {/* Spalte 2: Random Pick */}
     <div>
       <div className="whitespace-nowrap p-4 bg-gray-500 w-64 text-white rounded-2xl text-2xl text-center">
         Random Pick
       </div>
     </div>
 
-    {/* Spalte 3: Button */}
     <div>
       <button
         className="w-20 h-20 rounded hover:scale-125 transition-transform p-2"
@@ -62,37 +64,53 @@ export default function Home() {
       {loading && <p className="mt-4">Lade...</p>}
     </div>
 
-    <div></div> {/* Spalte 4 */}
-    <div></div> {/* Spalte 5 */}
+    <div></div> 
+    <div></div> 
   </div>
   <br/>
 
-  {/* Zweite Zeile */}
 <div className="grid grid-cols-4 gap-4 w-full place-items-center mt-4">
-  <div></div> {/* Spalte 1 */}
+  <div></div> 
   
-  {/* Spalte 2: breitere Zelle */}
   <div className="col-span-2 w-full"> 
+    <div className="text-5xl font-sans font-semibold">Deutsch</div>
+    <br/>
     <div className="whitespace-nowrap p-4 bg-gray-500 w-full text-white rounded-2xl text-lg h-48 p-7">
       <div className="grid grid-flow-col">
         <div className="text-4xl">
-          Wort
+          {fetchedData?.wordTranslated ?? 'Wort'}
         </div>
         <div className="flex justify-end">
-          Quelle
+          {fetchedData && <p>UrbanDictionary</p>}
         </div>
       </div>
       <br/>
       <div className="grid grid-flow-col">
         <div>
-          Erklärung 
+          {fetchedData?.definitionTranslated ?? 'Erklärung'}
         </div>
       </div>
     </div>
   </div>
 
-  <div></div> {/* Spalte 4 */}
+  <div></div>
 </div>
+
+<div className="grid grid-cols-4 gap-4 w-full place-items-center mt-4">
+  <div></div> 
+  
+  <div className="col-span-2 w-full"> 
+    <br/>
+    <div className="whitespace-nowrap p-4 bg-gray-500 w-full text-white rounded-2xl text-lg h-auto p-7 text-wrap">
+      <div className="text-wrap">
+          {fetchedData?.quoteTranslated ?? 'Zitat'}
+      </div>
+    </div>
+  </div>
+
+  <div></div>
+</div>
+
 </div>
   );
 }
