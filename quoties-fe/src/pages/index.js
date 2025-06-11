@@ -38,7 +38,7 @@ export default function Home() {
   };
 
   return (
-<div className="m-10">
+<div className="relative m-10">
   <div className="grid grid-cols-5 gap-4 w-full place-items-center">
     <div className={`${jacquesFrancois.className} col-span-1 text-5xl`}>Quoties</div>
     
@@ -150,9 +150,20 @@ export default function Home() {
       </div>
     </div>
   </div>
-
   <div></div>
 </div>
+  <div class="absolute bottom-0 right-0">
+    <button className="hover:scale-125 transition-transform">
+    <a href="https://github.com/Oscip/Quoties" target="_blank">
+    <Image
+      src="/github-mark.svg"
+      width={70}
+      height={70}
+      alt="GitHub Repo"
+    />
+    </a>
+    </button>
+    </div>
 </div>
   );
 }
