@@ -110,7 +110,49 @@ export default function Home() {
 
   <div></div>
 </div>
+<br/>
 
+<div className="grid grid-cols-4 gap-4 w-full place-items-center mt-4">
+  <div></div> 
+  
+  <div className="col-span-2 w-full"> 
+    <div className="text-5xl font-sans font-semibold">English</div>
+    <br/>
+    <div className="whitespace-nowrap p-4 bg-gray-500 w-full text-white rounded-2xl text-lg h-48 p-7">
+      <div className="grid grid-flow-col">
+        <div className="text-4xl">
+          {fetchedData?.word ?? 'Word'}
+        </div>
+        <div className="flex justify-end">
+          {fetchedData && <p>UrbanDictionary</p>}
+        </div>
+      </div>
+      <br/>
+      <div className="grid grid-flow-col">
+        <div>
+          {fetchedData?.definition ?? 'Definiton'}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div></div>
+</div>
+
+<div className="grid grid-cols-4 gap-4 w-full place-items-center mt-4">
+  <div></div> 
+  
+  <div className="col-span-2 w-full"> 
+    <br/>
+    <div className="whitespace-nowrap p-4 bg-gray-500 w-full text-white rounded-2xl text-lg h-auto p-7 text-wrap">
+      <div className="text-wrap">
+          {fetchedData?.quote ?? 'Quote'}
+      </div>
+    </div>
+  </div>
+
+  <div></div>
+</div>
 </div>
   );
 }
