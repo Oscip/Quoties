@@ -1,6 +1,11 @@
 import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Jacques_Francois } from "next/font/google";
 import { useState } from "react";
+
+const jacquesFrancois = Jacques_Francois({
+  subsets: ["latin"],
+  weight: "400", // nur Regular verfügbar
+});
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -33,33 +38,132 @@ export default function Home() {
   };
 
   return (
-    <div className="m-10">
-      <div className="grid grid-cols-5 gap-4 w-9/10 place-items-center">
-        <div className="col-span-1">Quoties</div>
-        <div></div>
-        <div className="flex gap-40 items-center justify-center">
-          <div className="whitespace-nowrap p-4 bg-gray-500 w-40 text-white rounded-2xl text-lg text-center">
-            Random Pick
-          </div>
-
-          <div>
-            <button
-              className="w-20 h-20 rounded hover:scale-125 transition-transform p-2"
-              onClick={fetchData}
-            >
-              <Image
-                src="/item_box.webp"
-                alt="Beispiel"
-                layout="responsive"
-                width={100}
-                height={100}
-              />
-            </button>
-            {loading && <p className="mt-4">Lade...</p>}
-          </div>
-        </div>
-        <div></div>
+<div className="relative m-10">
+  <div className="grid grid-cols-5 gap-4 w-full place-items-center">
+    <div className={`${jacquesFrancois.className} col-span-1 text-5xl`}>Quoties</div>
+    
+    <div>
+      <div className="whitespace-nowrap p-4 bg-gray-500 w-64 text-white rounded-2xl text-2xl text-center">
+        Random Pick
       </div>
     </div>
+
+    <div>
+      <button
+        className="w-20 h-20 rounded hover:scale-125 transition-transform p-2"
+        onClick={fetchData}
+      >
+        <Image
+          src="/item_box.webp"
+          alt="Beispiel"
+          layout="responsive"
+          width={100}
+          height={100}
+        />
+      </button>
+      {loading && <p className="mt-4">Lade...</p>}
+    </div>
+
+    <div></div> 
+    <div></div> 
+  </div>
+  <br/>
+
+<div className="grid grid-cols-4 gap-4 w-full place-items-center mt-4">
+  <div></div> 
+  
+  <div className="col-span-2 w-full"> 
+    <div className="text-5xl font-sans font-semibold">Deutsch</div>
+    <br/>
+    <div className="whitespace-nowrap p-4 bg-gray-500 w-full text-white rounded-2xl text-lg h-48 p-7">
+      <div className="grid grid-flow-col">
+        <div className="text-4xl">
+          {fetchedData?.wordTranslated ?? 'Wort'}
+        </div>
+        <div className="flex justify-end">
+          {fetchedData && <p>UrbanDictionary</p>}
+        </div>
+      </div>
+      <br/>
+      <div className="grid grid-flow-col">
+        <div>
+          {fetchedData?.definitionTranslated ?? 'Erklärung'}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div></div>
+</div>
+
+<div className="grid grid-cols-4 gap-4 w-full place-items-center mt-4">
+  <div></div> 
+  
+  <div className="col-span-2 w-full"> 
+    <br/>
+    <div className="whitespace-nowrap p-4 bg-gray-500 w-full text-white rounded-2xl text-lg h-auto p-7 text-wrap">
+      <div className="text-wrap">
+          {fetchedData?.quoteTranslated ?? 'Zitat'}
+      </div>
+    </div>
+  </div>
+
+  <div></div>
+</div>
+<br/>
+
+<div className="grid grid-cols-4 gap-4 w-full place-items-center mt-4">
+  <div></div> 
+  
+  <div className="col-span-2 w-full"> 
+    <div className="text-5xl font-sans font-semibold">English</div>
+    <br/>
+    <div className="whitespace-nowrap p-4 bg-gray-500 w-full text-white rounded-2xl text-lg h-48 p-7">
+      <div className="grid grid-flow-col">
+        <div className="text-4xl">
+          {fetchedData?.word ?? 'Word'}
+        </div>
+        <div className="flex justify-end">
+          {fetchedData && <p>UrbanDictionary</p>}
+        </div>
+      </div>
+      <br/>
+      <div className="grid grid-flow-col">
+        <div>
+          {fetchedData?.definition ?? 'Definiton'}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div></div>
+</div>
+
+<div className="grid grid-cols-4 gap-4 w-full place-items-center mt-4">
+  <div></div> 
+  
+  <div className="col-span-2 w-full"> 
+    <br/>
+    <div className="whitespace-nowrap p-4 bg-gray-500 w-full text-white rounded-2xl text-lg h-auto p-7 text-wrap">
+      <div className="text-wrap">
+          {fetchedData?.quote ?? 'Quote'}
+      </div>
+    </div>
+  </div>
+  <div></div>
+</div>
+  <div class="absolute bottom-0 right-0">
+    <button className="hover:scale-125 transition-transform">
+    <a href="https://github.com/Oscip/Quoties" target="_blank">
+    <Image
+      src="/github-mark.svg"
+      width={70}
+      height={70}
+      alt="GitHub Repo"
+    />
+    </a>
+    </button>
+    </div>
+</div>
   );
 }
