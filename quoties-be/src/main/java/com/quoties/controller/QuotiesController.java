@@ -3,14 +3,19 @@ package com.quoties.controller;
 import com.quoties.model.Quoties;
 import com.quoties.external.RandomWordClient;
 import com.quoties.repository.QuotiesRepository;
+import com.quoties.dto.QuotiesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.ResponseEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class QuotiesController {
 
     @Autowired
@@ -19,25 +24,26 @@ public class QuotiesController {
     @Autowired
     private RandomWordClient randomWordClient;
 
-    // Holt sich ein Wort
     @GetMapping("/word/random")
-    public String getRandomWord() {
+    public ResponseEntity<ObjectNode> getRandomWord() {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             ObjectNode root = objectMapper.createObjectNode();
             String word = randomWordClient.fetchRandomWord();
             root.put("word", word);
-            String jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(root);
-            return jsonString;
+
+            return ResponseEntity.ok(root);
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error fetching word: " + e.getMessage();
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectNode error = objectMapper.createObjectNode();
+            error.put("error", "Error fetching word: " + e.getMessage());
+            return ResponseEntity.status(500).body(error);
         }
     }
 
-    // Holt sich ein Wort auf die angefragte Menge
     @GetMapping("/words/{number}")
-    public String getRandomWords(@PathVariable int number) {
+    public ResponseEntity<ObjectNode> getRandomWords(@PathVariable int number) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             ArrayNode arrayNode = objectMapper.createArrayNode();
@@ -49,76 +55,52 @@ public class QuotiesController {
 
             ObjectNode root = objectMapper.createObjectNode();
             root.set("words", arrayNode);
-            String jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(root);
-
-
-            return jsonString;
+            return ResponseEntity.ok(root);
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error fetching words: " + e.getMessage();
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectNode error = objectMapper.createObjectNode();
+            error.put("error", "Error fetching words: " + e.getMessage());
+            return ResponseEntity.status(500).body(error);
         }
 
     }
 
 
-    @GetMapping("/quotes")
-    public String createNewQuote() {
+    @GetMapping("/quotes/new")
+    public ResponseEntity<QuotiesDTO> createNewQuote() {
         ObjectMapper objectMapper = new ObjectMapper();
 
         while (true) {
-            // Holt sich Daten von den APIs
+            // Daten holen von den APIs
             String word = randomWordClient.fetchRandomWord();
             String wordTranslated = randomWordClient.fetchTranslatedWord(word);
             String definition = randomWordClient.fetchDefinition(word);
             String definitionTranslated = randomWordClient.fetchTranslatedDefinition(definition);
             String quote = randomWordClient.fetchQuote(word);
 
-            // Überprüfung der Gültigkeit der Daten
-            boolean isQuoteInvalid = (
-                    quote == null ||
-                            quote.trim().isEmpty() ||
-                            quote.toLowerCase().contains("no quotes found")
-            );
-
-            boolean isDefinitionInvalid = (
-                    definition == null ||
-                            definition.trim().isEmpty() ||
-                            definition.toLowerCase().contains("no definition available")
-            );
-
-            if (isQuoteInvalid || isDefinitionInvalid) {
+            System.out.println("quote: " + quote);
+            // Quote Wert überprüfen
+            if (quote == null || quote.trim().toLowerCase().matches(".*no\\s+quotes\\s+found.*")) {
                 continue;
             }
+
 
             String quoteTranslated = randomWordClient.fetchTranslatedQuote(quote);
 
             try {
-                // Erstellt ein JSON-Objekt
-                ObjectNode root = objectMapper.createObjectNode();
-                root.put("word", word);
-                root.put("wordTranslated", wordTranslated);
-                root.put("definition", definition);
-                root.put("definitionTranslated", definitionTranslated);
-                root.put("quote", quote);
-                root.put("quoteTranslated", quoteTranslated);
-                String jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(root);
-                System.out.println(jsonString);
-
-                // Speichert  die Daten in der Datenbank
-                Quoties quoties = new Quoties();
-                quoties.setWord(word);
-                quoties.setWordTranslated(wordTranslated);
-                quoties.setDefinition(definition);
-                quoties.setDefinitionTranslated(definitionTranslated);
-                quoties.setQuote(quote);
-                quoties.setQuoteTranslated(quoteTranslated);
+                // Speichert in der Datenbank
+                Quoties quoties = new Quoties(quote, quoteTranslated, word, wordTranslated, definition, definitionTranslated);
                 quotiesRepository.save(quoties);
 
-                return jsonString;
+                // JSON Antwort erstellen
+                QuotiesDTO dto = new QuotiesDTO(quote, quoteTranslated, word, wordTranslated, definition, definitionTranslated);
+                return ResponseEntity.ok(dto);
             } catch (Exception e) {
                 e.printStackTrace();
-                return "Error creating new quote: " + e.getMessage();
+                return ResponseEntity.status(500).build();
             }
         }
     }
 }
+

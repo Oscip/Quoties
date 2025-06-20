@@ -76,31 +76,7 @@ Das Backend integriert eine öffentliche API, um ein zufälliges Wort zu bekomme
 
 #### Endpunkte (Backend API)
 
-1. **GET /api/word**W
-   - Beschreibung: Gibt ein zufälliges Wort zusammen mit seiner Definition zurück.
-   - Antwort:
-     ```json
-     {
-       "word": "inspiration",
-       "definition": "the process of being mentally stimulated to do or feel something, especially to do something creative."
-     }
-     ```
-
-2. **GET /api/quotes**
-   - Beschreibung: Gibt eine Liste von Zitaten zurück, die das zufällige Wort enthalten oder zu diesem Thema passen.
-   - Antwort:
-     ```json
-     [
-       {
-         "quote": "The only way to do great work is to love what you do.",
-         "author": "Steve Jobs"
-       },
-       {
-         "quote": "Inspiration exists, but it has to find you working.",
-         "author": "Pablo Picasso"
-       }
-     ]
-     ```
+1. **GET /api/word**
     - Beschreibung: Gibt ein zufälliges Wort zusammen mit seiner Definition zurück.
     - Antwort:
       ```json
@@ -109,6 +85,30 @@ Das Backend integriert eine öffentliche API, um ein zufälliges Wort zu bekomme
         "definition": "the process of being mentally stimulated to do or feel something, especially to do something creative."
       }
       ```
+
+2. **GET /api/quotes**
+    - Beschreibung: Gibt eine Liste von Zitaten zurück, die das zufällige Wort enthalten oder zu diesem Thema passen.
+    - Antwort:
+      ```json
+      [
+        {
+          "quote": "The only way to do great work is to love what you do.",
+          "author": "Steve Jobs"
+        },
+        {
+          "quote": "Inspiration exists, but it has to find you working.",
+          "author": "Pablo Picasso"
+        }
+      ]
+      ```
+      - Beschreibung: Gibt ein zufälliges Wort zusammen mit seiner Definition zurück.
+      - Antwort:
+        ```json
+        {
+          "word": "inspiration",
+          "definition": "the process of being mentally stimulated to do or feel something, especially to do something creative."
+        }
+        ```
 
 ### Testen
 
@@ -135,12 +135,12 @@ Die Applikation wird mit JUnit im Backend getestet und die API-Calls an sich mit
 ## Technologien
 
 - **Frontend:**
-  - Next.js
-  - React
-  - Fetch (für API-Anfragen)
-  
+    - Next.js
+    - React
+    - Fetch (für API-Anfragen)
+
 - **Backend:**
-  - Spring Boot
-  - Java 17+
-  - Spring Data JPA (optional)
-  - Integration mit einer öffentlichen API für zufällige Wörter
+    - Spring Boot
+    - Java 17+
+    - Spring Data JPA (optional)
+    - Integration mit einer öffentlichen API für zufällige Wörter

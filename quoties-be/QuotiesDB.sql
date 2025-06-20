@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
+<<<<<<< HEAD
+-- Generation Time: May 27, 2025 at 07:06 AM
+=======
 -- Generation Time: Jun 03, 2025 at 07:49 AM
+>>>>>>> oscar
 -- Server version: 9.1.0
 -- PHP Version: 8.2.8
 
@@ -33,7 +37,11 @@ CREATE TABLE `quoties` (
   `word_translated` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `definition` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `definition_translated` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+<<<<<<< HEAD
+  `quote` varchar(255) NOT NULL,
+=======
   `quote` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+>>>>>>> oscar
   `quote_translated` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -62,11 +70,15 @@ INSERT INTO `quoties` (`id`, `word`, `word_translated`, `definition`, `definitio
 (18, 'durable', NULL, 'A durable thing, one useful over more than one period, especially a year.', 'langlebig', '\"With honesty of purpose, balance, a respect for tradition, courage, and, above all, a philosophy of life, any young person who embraces the historical profession will find it rich in rewards and durable in satisfaction.\" — Samuel E. Morison', NULL),
 (19, 'trailing', 'angehängt', 'To follow behind (someone or something); to tail (someone or something).', '(jemandem oder etwas) zu folgen; (jemandem oder etwas) zu folgen.', '\"A jellyfish is little more than a pulsating bell, a tassel of trailing tentacles and a single digestive opening through which it both eats and excretes - as regrettable an example of economy of design as ever was.\" — Jeffrey Kluger', '„Eine Qualle ist kaum mehr als eine pulsierende Glocke, eine Quaste aus nachlaufenden Tentakeln und eine einzige Verdauungsöffnung, durch die sie sowohl frisst als auch ausscheidet - ein bedauerliches Beispiel für Designökonomie wie eh und je.\" — Jeffrey Kluger'),
 (20, 'hemstitch', 'saumstich', 'An embroidery stitch in which parallel threads are drawn together in groups', 'Ein Stickstich, bei dem parallele Fäden gruppenweise zusammengezogen werden', '\"No quotes found\" — ', 'Keine Angebote gefunden'),
+<<<<<<< HEAD
+(21, 'overrule', 'Überstimmung', 'To rule over; to govern or determine by superior authority.', 'Zu herrschen; zu regieren oder durch überlegene Autorität zu bestimmen.', '\"No quotes found\" — ', 'Keine Angebote gefunden');
+=======
 (21, 'overrule', 'Überstimmung', 'To rule over; to govern or determine by superior authority.', 'Zu herrschen; zu regieren oder durch überlegene Autorität zu bestimmen.', '\"No quotes found\" — ', 'Keine Angebote gefunden'),
 (22, 'expediter', 'expeditor', 'No definition available', 'Keine Definition vorhanden.', '\"No quotes found\" — ', 'Keine Angebote gefunden'),
 (23, 'equinox', 'Equinox', 'The intersection of the apparent path of the sun in the sky (the ecliptic) with the celestial equator.', 'Der Schnittpunkt der scheinbaren Bahn der Sonne am Himmel (der Ekliptik) mit dem Himmelsäquator.', '\"No quotes found\" — ', 'Keine Angebote gefunden'),
 (24, 'popsicle', 'Eis am Stiel', 'Frozen fruit juice, flavored sugar water or the like, on a stick, of a size to be one serving.', 'Gefrorener Fruchtsaft, aromatisiertes Zuckerwasser oder ähnliches, auf einem Stock, in einer Größe von einer Portion.', '\"I like freedom. I wake up in the morning and say, \'I don\'t know, should I have a popsicle or a donut?\' You know, who knows?\" — Oscar Nunez', '\"Ich mag Freiheit. Ich wache morgens auf und sage:\" Ich weiß nicht, sollte ich ein Eis am Stiel oder einen Donut haben? \"Weißt du, wer weiß?\" — Oscar Nunez'),
 (25, 'shove', 'schubsen', 'A rough push.', 'Ein rauer Stoß.', '\"The world is full of abundance and opportunity, but far too many people come to the fountain of life with a sieve instead of a tank car... a teaspoon instead of a steam shovel. They expect little and as a result they get little.\" — Ben Sweetland', '„Die Welt ist voller Fülle und Möglichkeiten, aber viel zu viele Menschen kommen mit einem Sieb anstelle eines Tankwagens zum Brunnen des Lebens… einem Teelöffel anstelle einer Dampfschaufel. Sie erwarten wenig und bekommen dadurch wenig.\" — Ben Sweetland');
+>>>>>>> oscar
 
 --
 -- Indexes for dumped tables
@@ -86,7 +98,11 @@ ALTER TABLE `quoties`
 -- AUTO_INCREMENT for table `quoties`
 --
 ALTER TABLE `quoties`
+<<<<<<< HEAD
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+=======
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+>>>>>>> oscar
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
