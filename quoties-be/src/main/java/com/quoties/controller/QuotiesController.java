@@ -12,9 +12,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class QuotiesController {
 
     @Autowired
@@ -78,10 +79,12 @@ public class QuotiesController {
             String definitionTranslated = randomWordClient.fetchTranslatedDefinition(definition);
             String quote = randomWordClient.fetchQuote(word);
 
+            System.out.println("quote: " + quote);
             // Quote Wert überprüfen
-            if (quote == null || quote.trim().equalsIgnoreCase("No quotes found")) {
+            if (quote == null || quote.trim().toLowerCase().matches(".*no\\s+quotes\\s+found.*")) {
                 continue;
             }
+
 
             String quoteTranslated = randomWordClient.fetchTranslatedQuote(quote);
 
