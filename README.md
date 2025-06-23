@@ -2,6 +2,17 @@
 
 Die Quoties-App ist eine Webanwendung, die es Benutzern ermöglicht, zufällige Wörter mit Definitionen zu erhalten und Zitate anzuzeigen, die zu diesen Wörtern passen oder sie enthalten. Die App besteht aus einem **Next.js-Frontend** und einem **Spring Boot-Backend**.
 
+## Projektinformationen
+
+- **Autor:innen:** Oscar Peach, Mike Zogheib, Fabian Beck  
+- **Schule:** Berufsbildungsschule Winterthur (BBW)  
+- **Zeitraum:** 15.04.2025 – 24.06.2025
+
+## Zusammenfassende Erklärung 
+
+Die Quoties-App ist eine innovative Webanwendung, die es Benutzern ermöglicht, zufällige Wörter zu entdecken und Zitate zu finden, die diese Wörter enthalten oder thematisch dazu passen. Die App nutzt eine öffentliche API, um ein zufälliges Wort mit seiner Definition abzurufen und bietet eine benutzerfreundliche Oberfläche, um Zitate zu suchen und anzuzeigen. Das Frontend ist in Next.js (React) entwickelt, während das Backend auf Spring Boot basiert, um RESTful APIs bereitzustellen.
+
+
 ## Features
 
 - **Zufälliges Wort:** Die App ruft ein zufälliges Wort aus einer öffentlichen API ab, zusammen mit der Definition des Wortes.
@@ -76,7 +87,7 @@ Das Backend integriert eine öffentliche API, um ein zufälliges Wort zu bekomme
 
 #### Endpunkte (Backend API)
 
-1. **GET /api/word**
+1. **GET /api/word/random**
     - Beschreibung: Gibt ein zufälliges Wort zusammen mit seiner Definition zurück.
     - Antwort:
       ```json
@@ -86,29 +97,35 @@ Das Backend integriert eine öffentliche API, um ein zufälliges Wort zu bekomme
       }
       ```
 
-2. **GET /api/quotes**
-    - Beschreibung: Gibt eine Liste von Zitaten zurück, die das zufällige Wort enthalten oder zu diesem Thema passen.
+2. **GET /api/word/{nummer}**
+    - Beschreibung: Gibt ein zufälliges Wort mit der Nummer zurück, die in der URL angegeben ist.
+    - Antwort:
+      ```json
+      {
+        "word": "flying",
+        "definition": "the action of moving through the air by means of wings or an aircraft."
+      }
+      {
+        "word": "studying",
+        "definition": "the devotion of time and attention to acquiring knowledge on a subject, especially by reading."
+      }
+      ```
+
+3. **GET /api/quotes/new**
+    - Beschreibung: Gibt ein Zufallszitat zurück, das das zufällige Wort enthält, von dennen beide von Englisch auf Deutsch auch übersetzt zurückgegeben werden.
     - Antwort:
       ```json
       [
-        {
-          "quote": "The only way to do great work is to love what you do.",
-          "author": "Steve Jobs"
-        },
-        {
-          "quote": "Inspiration exists, but it has to find you working.",
-          "author": "Pablo Picasso"
-        }
+         {
+            "quote": "\"We don't need new taxes. We need new taxpayers, people that are gainfully employed, making money and paying into the tax system. And then we need a government that has the discipline to take that additional revenue and use it to pay down the debt and never grow it again.\" — Marco Rubio",
+            "quoteTranslated": "„Wir brauchen keine neuen Steuern. Wir brauchen neue Steuerzahler, Menschen, die erwerbstätig sind, Geld verdienen und in das Steuersystem einzahlen. Und dann brauchen wir eine Regierung, die die Disziplin hat, diese zusätzlichen Einnahmen zu nehmen und sie zu verwenden, um die Schulden zu begleichen und sie nie wieder wachsen zu lassen.\" — Marco Rubio",
+            "word": "gainfully",
+            "wordTranslated": "gewinnbringend",
+            "definition": "In a gainful manner; profitably.",
+            "definitionTranslated": "Gewinnbringend."
+         }
       ]
       ```
-      - Beschreibung: Gibt ein zufälliges Wort zusammen mit seiner Definition zurück.
-      - Antwort:
-        ```json
-        {
-          "word": "inspiration",
-          "definition": "the process of being mentally stimulated to do or feel something, especially to do something creative."
-        }
-        ```
 
 ### Testen
 
@@ -144,3 +161,14 @@ Die Applikation wird mit JUnit im Backend getestet und die API-Calls an sich mit
     - Java 17+
     - Spring Data JPA (optional)
     - Integration mit einer öffentlichen API für zufällige Wörter
+
+## 📊 Persönliche Auswertung (Reflexion)
+Die Arbeit an der Quoties-App hat uns nicht nur technisches Wissen vermittelt, sondern auch unsere Fähigkeiten in Projektorganisation, Versionskontrolle mit Git, Teamarbeit und Dokumentation verbessert. Wir haben gelernt, wie man moderne Webarchitekturen entwirft und wie wichtig saubere Schnittstellen und strukturierter Code sind.
+
+### Besonders stolz sind wir auf:
+
+Die reibungslose Kommunikation zwischen Frontend und Backend
+
+Das benutzerfreundliche Design und die intuitive UI
+
+Die stabile Integration externer APIs
