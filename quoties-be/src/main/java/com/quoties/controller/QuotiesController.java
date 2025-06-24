@@ -85,6 +85,11 @@ public class QuotiesController {
                 continue;
             }
 
+            // Definition Wert überprüfen
+            if (definition == null || definition.trim().toLowerCase().matches(".*no\\s+definition[s]?\\s+available.*")) {
+                continue;
+            }
+
 
             String quoteTranslated = randomWordClient.fetchTranslatedQuote(quote);
 
