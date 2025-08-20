@@ -61,7 +61,7 @@ export default function Home() {
               height={100}
             />
           </button>
-          {loading && <p className="mt-4">Lade...</p>}
+          {loading && <p className="mt-4">Loading...</p>}
         </div>
         <div></div>
       </div>
