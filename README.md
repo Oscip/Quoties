@@ -4,7 +4,7 @@ Die Quoties-App ist eine Webanwendung, die es Benutzern ermöglicht, zufällige 
 
 ## Projektinformationen
 
-- **Autor:innen:** Oscar Peach, Mike Zogheib, Fabian Beck  
+- **Autoren:** Oscar Peach, Mike Zogheib, Fabian Beck  
 - **Schule:** Berufsbildungsschule Winterthur (BBW)  
 - **Zeitraum:** 15.04.2025 – 24.06.2025
 
@@ -25,6 +25,20 @@ Die Quoties-App ist eine innovative Webanwendung, die es Benutzern ermöglicht, 
 - **Frontend:** Next.js (React)
 - **Backend:** Spring Boot (Java)
 - **Datenbank:** In diesem Beispiel werden keine Datenbankoperationen benötigt, aber es könnte eine Datenbank verwendet werden, um Zitate zu speichern.
+
+
+## Screenshot
+
+Hier ist ein Screenshot der Quoties-App, der die Benutzeroberfläche mit einem zufälligen Wort und passenden Zitaten zeigt:
+
+![Quoties-App Screenshot](./visualisation.png)
+
+
+## Demo-Video
+
+Ein kurzes Video (30 Sekunden), das die Funktionsweise der App zeigt:
+
+https://github.com/user-attachments/assets/8f1b098e-c8d4-4d2e-b63e-f2fab5030544
 
 ## Installation und Setup
 
@@ -99,17 +113,19 @@ Das Backend integriert eine öffentliche API, um ein zufälliges Wort zu bekomme
 
 2. **GET /api/word/{nummer}**
     - Beschreibung: Gibt ein zufälliges Wort mit der Nummer zurück, die in der URL angegeben ist.
-    - Antwort:
-      ```json
-      {
-        "word": "flying",
-        "definition": "the action of moving through the air by means of wings or an aircraft."
-      }
-      {
-        "word": "studying",
-        "definition": "the devotion of time and attention to acquiring knowledge on a subject, especially by reading."
-      }
-      ```
+      - Antwort:
+        ```json
+        [
+            {
+              "word": "flying",
+              "definition": "the action of moving through the air by means of wings or an aircraft."
+            },
+            {
+              "word": "studying",
+              "definition": "the devotion of time and attention to acquiring knowledge on a subject, especially by reading."
+            }
+        ]
+        ```
 
 3. **GET /api/quotes/new**
     - Beschreibung: Gibt ein Zufallszitat zurück, das das zufällige Wort enthält, von dennen beide von Englisch auf Deutsch auch übersetzt zurückgegeben werden.
